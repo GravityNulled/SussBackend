@@ -31,9 +31,9 @@ namespace Suss.Api.Middlewares
                     Type = "Interna Server Error",
                     Detail = "Internal Server Error occured"
                 };
-                var json = JsonSerializer.Serialize(problem);
-                await context.Response.WriteAsync(json);
-                context.Response.ContentType= "application/json";
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsJsonAsync(problem);
+                
 			}
         }
     }
