@@ -53,6 +53,5 @@ namespace Suss.UnitTests.Controllers
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(resultType);
         }
-
     }
 }
