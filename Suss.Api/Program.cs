@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddLogging();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
-builder.Services.AddScoped<ICampaignRepository, CampaignRepository>();
+builder.Services.AddSingleton<ICampaignRepository, CampaignRepository>();
 builder.Services.AddTransient<GlobalExceptionErrorHandlingMiddleware>();
 builder.Services.AddHealthChecks().AddCheck<MpesaHealthCheck>("Mpesa");
 builder.Services.AddAuthentication(options =>

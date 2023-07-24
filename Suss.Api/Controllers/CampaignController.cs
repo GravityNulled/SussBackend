@@ -6,7 +6,7 @@ using Suss.Infrastructure;
 
 namespace Suss.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("/api/[controller]")]
     public class CampaignController : ControllerBase
