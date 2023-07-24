@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Suss.Application;
 using Suss.Domain;
 using Suss.Infrastructure;
 
 namespace Suss.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/api/[controller]")]
     public class CampaignController : ControllerBase
@@ -44,7 +46,7 @@ namespace Suss.Api.Controllers
                 if (checkDates)
                 {
                     var entity = _campaignService.Create(campaign);
-                    return CreatedAtAction("GetById", new { id = entity.CampaignId }, entity);
+                    return CreatedAtAction(nameof(GetById), new { id = entity.CampaignId }, entity);
                 }
                 return BadRequest("Invalid input data. Please check the provided information.");
 
