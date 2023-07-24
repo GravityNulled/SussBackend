@@ -12,14 +12,16 @@ namespace Suss.Domain
         [Required]
         [Key]
         public int CampaignId { get; set; }
-        [Required]
 
-        [StringLength(50)]
+        [Required]
+        [MaxLength(10)]
+        [MinLength(3)]
         public required string Name { get; set; }
+        
         [Required]
         public DateTime StartDate { get; set; }
+        
         [Required]
-
         public DateTime EndDate { get; set; }
         [Required]
         public List<string> Products { get; set; } = new List<string>();
