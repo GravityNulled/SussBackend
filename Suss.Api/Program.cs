@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
+using Suss.Api.Health;
 using Suss.Api.Middlewares;
 using Suss.Application;
 using Suss.Infrastructure;
@@ -17,7 +19,7 @@ builder.Services.AddLogging();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<ICampaignRepository, CampaignRepository>();
 builder.Services.AddTransient<GlobalExceptionErrorHandlingMiddleware>();
-
+builder.Services.AddHealthChecks().AddCheck<MpesaHealthCheck>("Mpesa");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -46,6 +48,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseMiddleware<GlobalExceptionErrorHandlingMiddleware>();
+
+app.MapHealthChecks("/_health");
 
 app.UseAuthentication();
 app.UseAuthorization();
