@@ -1,3 +1,4 @@
+using Suss.Api.Middlewares;
 using Suss.Application;
 using Suss.Infrastructure;
 
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<ICampaignRepository, CampaignRepository>();
+builder.Services.AddTransient<GlobalExceptionErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -24,6 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseMiddleware<GlobalExceptionErrorHandlingMiddleware>();
 
 app.MapControllers();
 
