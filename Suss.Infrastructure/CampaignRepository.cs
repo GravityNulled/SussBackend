@@ -1,4 +1,5 @@
-﻿using Suss.Application;
+﻿using ChallengeSuss.Models;
+using Suss.Application;
 using Suss.Domain;
 using System;
 using System.Collections.Generic;
@@ -11,39 +12,50 @@ namespace Suss.Infrastructure
     public class CampaignRepository : ICampaignRepository
     {
         private readonly List<Campaign> _campaigns;
+        private readonly List<Service> _services = new()
+        {
+            new Service {
+                Id = 1,
+                Name = "Ads Service",
+                Description = "Best Ads in the market",
+            },
+            new Service {
+                Id = 2,
+                Name = "Sms Service",
+                Description = "Send Sms to clients directly",
+            },
+        };
         public CampaignRepository()
         {
             _campaigns = new List<Campaign>()
             {
                 new Campaign
-                    {
-                CampaignId=1,
-                Name="Ads Campaign",
-                StartDate= new DateTime(2023, 7, 31),
-                EndDate= new DateTime(2023, 8, 31),
-                Products = new List<string>
                 {
-                   "Ads1",
-                   "Ads2"
-                }
-                    },
-                 new Campaign
-            {
-                CampaignId=2,
-                Name="Sms Campaign",
-                StartDate= new DateTime(2023, 7, 31),
-                EndDate= new DateTime(2023, 8, 31),
-                Products = new List<string>
+                    CampaignId = 1,
+                    Name="Ads Campaign",
+                    StartDate= new DateTime(2023, 7, 31),
+                    EndDate= new DateTime(2023, 8, 31),
+                    serviceId = 1,
+                },
+                new Campaign
                 {
-                   "sms1",
-                   "sms2"
-                }
-            },
+                    CampaignId = 2,
+                    Name="Sms Campaign",
+                    StartDate= new DateTime(2023, 7, 31),
+                    EndDate= new DateTime(2023, 8, 31),
+                    serviceId = 2,
+                },
             };
         }
 
         public Campaign Create(Campaign campaign)
         {
+            var checkService = _services.Find(x => x.Id == campaign.serviceId);
+            campaign.CampaignId = _campaigns.Max(x => x.CampaignId) + 1;
+            if (checkService == null)
+            {
+                return null;
+            }
             _campaigns.Add(campaign);
             return campaign;
         }
@@ -78,7 +90,7 @@ namespace Suss.Infrastructure
             var entity = _campaigns.FirstOrDefault(c => c.CampaignId == id);
             if (entity is not null)
             {
-                entity.Products = campaign.Products;
+                entity.serviceId = campaign.serviceId;
                 entity.StartDate = campaign.StartDate;
                 entity.EndDate = campaign.EndDate;
                 return true;

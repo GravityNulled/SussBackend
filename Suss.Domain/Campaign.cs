@@ -24,6 +24,6 @@ namespace Suss.Domain
         [Required]
         public DateTime EndDate { get; set; }
         [Required]
-        public List<string> Products { get; set; } = new List<string>();
+        public int serviceId { get; set; }
     }
 }

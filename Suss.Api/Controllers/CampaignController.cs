@@ -46,6 +46,10 @@ namespace Suss.Api.Controllers
                 if (checkDates)
                 {
                     var entity = _campaignService.Create(campaign);
+                    if (entity == null)
+                    {
+                        return BadRequest();
+                    }
                     return CreatedAtAction(nameof(GetById), new { id = entity.CampaignId }, entity);
                 }
                 return BadRequest("Invalid input data. Please check the provided information.");
