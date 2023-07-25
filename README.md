@@ -16,7 +16,7 @@ POST /api/campaigns
   "name": "Ads Campaign",
   "startDate": "07/22/2023",
   "endDate": "08/22/2023",
-  "products": ["Ads1", "Ads2"]
+  "serviceId": 1
 }
 ```
 
@@ -36,7 +36,7 @@ Location: {{host}}/campaigns/{{id}}
   "name": "Ads Campaign",
   "startDate": "07/22/2023",
   "endDate": "08/22/2023",
-  "products": ["Ads1", "Ads2"]
+  "serviceId": 1
 }
 ```
 
@@ -61,14 +61,14 @@ GET /campaigns
     "name": "Ads Campaign",
     "startDate": "07/22/2023",
     "endDate": "08/22/2023",
-    "products": ["Ads1", "Ads2"]
+    "serviceId": 1
   },
   {
       "id": 1,
       "name": "Sms Campaign",
       "startDate": "07/22/2023",
       "endDate": "08/22/2023",
-      "products": ["Ads1", "Ads2"]
+       "serviceId": 2
     },
 ]
 ```
@@ -90,7 +90,7 @@ GET /campaigns/{{id}}
   "name": "Ads Campaign",
   "startDate": "07/22/2023",
   "endDate": "08/22/2023",
-  "products": ["Ads1", "Ads2"]
+  "serviceId": 1
 }
 ```
 
@@ -108,7 +108,7 @@ PUT /campaigns/{{id}}
   "name": "Ads Campaign",
   "startDate": "07/22/2023",
   "endDate": "08/22/2023",
-  "products": ["Ads1"]
+  "serviceId": 1
 }
 ```
 
